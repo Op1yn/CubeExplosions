@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Explosion))]
+[RequireComponent(typeof(Rigidbody))]
+
 public class Cube : MonoBehaviour
 {
     private Explosion _explosion;
@@ -24,8 +27,8 @@ public class Cube : MonoBehaviour
         }
     }
 
-    public void Explode(List<Cube> cubes)
+    public void Explode(List<Rigidbody> rigidbodys)
     {
-        _explosion.Explode(cubes);
+        _explosion.Explode(rigidbodys);
     }
 }

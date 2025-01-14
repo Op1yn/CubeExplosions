@@ -5,13 +5,13 @@ public class Explosion : MonoBehaviour
 {
     [SerializeField] private float _power;
     private float _radius;
+    private float _shift = 2f;
 
-    public void Explode(List<Cube> cubes)
+    public void Explode(List<Rigidbody> rigidbodys)
     {
-        foreach (var cube in cubes)
+        foreach (Rigidbody rigidbody in rigidbodys)
         {
-            cube.GetComponent<Rigidbody>().AddExplosionForce(_power, transform.position, _radius, 2f);
+            rigidbody.AddExplosionForce(_power, transform.position, _radius, _shift);
         }        
     }
-
 }
