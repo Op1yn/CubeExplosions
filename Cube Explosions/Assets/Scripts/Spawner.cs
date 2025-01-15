@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,8 +6,6 @@ public class Spawner : MonoBehaviour
     [SerializeField] private Cube _cube;
     [SerializeField] private Selector _selector;
     private List<Rigidbody> _rigidbodys;
-
-    public event Action<List<Rigidbody>> CreatedNewCubes;
 
     private void OnEnable()
     {
@@ -25,13 +22,13 @@ public class Spawner : MonoBehaviour
         float minimumNumber = 0;
         float maximumNumber = 100;
 
-        float randomNumber = UnityEngine.Random.Range(minimumNumber, maximumNumber + 1);
+        float randomNumber = Random.Range(minimumNumber, maximumNumber + 1);
 
         if (randomNumber <= cube.ChanceSeparation)
         {
             int minimumNumberCubes = 2;
             int maximumNumberCubes = 6;
-            int numberCubes = UnityEngine.Random.Range(minimumNumberCubes, maximumNumberCubes + 1);
+            int numberCubes = Random.Range(minimumNumberCubes, maximumNumberCubes + 1);
 
             _rigidbodys = new List<Rigidbody>(numberCubes);
 
@@ -48,11 +45,7 @@ public class Spawner : MonoBehaviour
                 _rigidbodys.Add(newCube.GetComponent<Rigidbody>());
             }
 
-            CreatedNewCubes += cube.Explode;
-            CreatedNewCubes?.Invoke(_rigidbodys);
+            cube.Explode(_rigidbodys);   
         }
-
-        CreatedNewCubes -= cube.Explode;
-        Destroy(cube.gameObject);
     }
 }

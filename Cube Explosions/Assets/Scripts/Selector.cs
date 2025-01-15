@@ -4,8 +4,10 @@ using UnityEngine;
 public class Selector : MonoBehaviour
 {
     [SerializeField] private LayerMask _layerMask;
+
     private Camera _mainCamera;
     private float _rayLength = 100;
+    private int _leftMouseButton = 0;
 
     public event Action<Cube> SelectedCube;
 
@@ -16,7 +18,12 @@ public class Selector : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        MakeChoice();
+    }
+
+    private void MakeChoice()
+    {
+        if (Input.GetMouseButtonDown(_leftMouseButton))
         {
             Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -26,7 +33,10 @@ public class Selector : MonoBehaviour
                 if (hit.collider.TryGetComponent(out Cube cube))
                 {
                     SelectedCube?.Invoke(cube);
+
                 }
+
+                Destroy(cube.gameObject);
             }
         }
     }
