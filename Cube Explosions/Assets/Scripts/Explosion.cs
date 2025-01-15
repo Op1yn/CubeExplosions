@@ -11,7 +11,7 @@ public class Explosion : MonoBehaviour
     {
         foreach (Rigidbody rigidbody in rigidbodys)
         {
-            rigidbody.AddExplosionForce(_power, transform.position, _radius, _shift);
+            rigidbody.AddExplosionForce(_power, rigidbody.transform.position, _radius, _shift);
         }        
     }
 }

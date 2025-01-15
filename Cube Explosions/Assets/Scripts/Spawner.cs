@@ -3,49 +3,32 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private Cube _cube;
-    [SerializeField] private Selector _selector;
     private List<Rigidbody> _rigidbodys;
 
-    private void OnEnable()
+    public void CreateCubes(Cube cube)
     {
-        _selector.SelectedCube += CreateCube;
-    }
+        int minimumNumberCubes = 2;
+        int maximumNumberCubes = 6;
+        int numberCubes = Random.Range(minimumNumberCubes, maximumNumberCubes + 1);
 
-    private void OnDisable()
-    {
-        _selector.SelectedCube -= CreateCube;
-    }
+        _rigidbodys = new List<Rigidbody>(numberCubes);
 
-    public void CreateCube(Cube cube)
-    {
-        float minimumNumber = 0;
-        float maximumNumber = 100;
+        int reductionRatio = 2;
+        Transform transformSelectedCube = cube.transform;
 
-        float randomNumber = Random.Range(minimumNumber, maximumNumber + 1);
-
-        if (randomNumber <= cube.ChanceSeparation)
+        for (int i = 0; i < numberCubes; i++)
         {
-            int minimumNumberCubes = 2;
-            int maximumNumberCubes = 6;
-            int numberCubes = Random.Range(minimumNumberCubes, maximumNumberCubes + 1);
+            Cube newCube = Instantiate(cube, cube.transform.position, Quaternion.identity);
 
-            _rigidbodys = new List<Rigidbody>(numberCubes);
+            newCube.transform.localScale = new Vector3(transformSelectedCube.localScale.x / reductionRatio, transformSelectedCube.localScale.y / reductionRatio, transformSelectedCube.localScale.z / reductionRatio);
+            newCube.SetChanceSeparation(cube.ChanceSeparation / reductionRatio);
 
-            int reductionRatio = 2;
-            Transform transformSelectedCube = cube.transform;
-
-            for (int i = 0; i < numberCubes; i++)
-            {
-                Cube newCube = Instantiate(_cube, cube.transform.position, Quaternion.identity);
-
-                newCube.transform.localScale = new Vector3(transformSelectedCube.localScale.x / reductionRatio, transformSelectedCube.localScale.y / reductionRatio, transformSelectedCube.localScale.z / reductionRatio);
-                newCube.SetChanceSeparation(cube.ChanceSeparation / reductionRatio);
-
-                _rigidbodys.Add(newCube.GetComponent<Rigidbody>());
-            }
-
-            cube.Explode(_rigidbodys);   
+            _rigidbodys.Add(newCube.GetComponent<Rigidbody>());
         }
+    }
+
+    public List<Rigidbody> GetRigidbodys()
+    {
+        return _rigidbodys;
     }
 }
