@@ -405,6 +405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <ChanceSeparation>k__BackingField: 100
+  <ReductionRatio>k__BackingField: 2
 --- !u!114 &1027533272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -769,6 +770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <ChanceSeparation>k__BackingField: 100
+  <ReductionRatio>k__BackingField: 2
 --- !u!114 &1602342649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1132,7 +1134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 318f48ee52c241041ac616bbe4063e4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _power: 600
+  _power: 800
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -1,5 +1,7 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Renderer))]
+
 public class Painter : MonoBehaviour
 {
     private void OnEnable()
@@ -7,7 +9,7 @@ public class Painter : MonoBehaviour
         Paint();
     }
 
-    public void Paint()
+    private void Paint()
     {
         float minimumValue = 0f;
         float maximumValue = 1f;

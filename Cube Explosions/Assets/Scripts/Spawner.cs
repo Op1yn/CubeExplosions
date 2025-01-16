@@ -5,7 +5,7 @@ public class Spawner : MonoBehaviour
 {
     private List<Rigidbody> _rigidbodys;
 
-    public void CreateCubes(Cube cube)
+    public List<Rigidbody> CreateCubes(Cube cube)
     {
         int minimumNumberCubes = 2;
         int maximumNumberCubes = 6;
@@ -13,22 +13,16 @@ public class Spawner : MonoBehaviour
 
         _rigidbodys = new List<Rigidbody>(numberCubes);
 
-        int reductionRatio = 2;
-        Transform transformSelectedCube = cube.transform;
+        Vector3 sizeAncestorFaces = cube.transform.localScale;
 
         for (int i = 0; i < numberCubes; i++)
         {
             Cube newCube = Instantiate(cube, cube.transform.position, Quaternion.identity);
-
-            newCube.transform.localScale = new Vector3(transformSelectedCube.localScale.x / reductionRatio, transformSelectedCube.localScale.y / reductionRatio, transformSelectedCube.localScale.z / reductionRatio);
-            newCube.SetChanceSeparation(cube.ChanceSeparation / reductionRatio);
+            newCube.Initialization(cube.ChanceSeparation, sizeAncestorFaces);
 
             _rigidbodys.Add(newCube.GetComponent<Rigidbody>());
         }
-    }
 
-    public List<Rigidbody> GetRigidbodys()
-    {
         return _rigidbodys;
     }
 }
