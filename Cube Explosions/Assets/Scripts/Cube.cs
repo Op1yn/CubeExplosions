@@ -17,7 +17,7 @@ public class Cube : MonoBehaviour
     {
         float minimumNumber = 0;
         float maximumNumber = 100;
-        float randomChance = Random.Range(minimumNumber, maximumNumber + 1);
+        float randomChance = UnityEngine.Random.Range(minimumNumber, maximumNumber + 1);
 
         return randomChance <= ChanceSeparation;
     }
