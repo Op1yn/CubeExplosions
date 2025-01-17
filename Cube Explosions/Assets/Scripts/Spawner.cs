@@ -20,7 +20,7 @@ public class Spawner : MonoBehaviour
             Cube newCube = Instantiate(cube, cube.transform.position, Quaternion.identity);
             newCube.Initialization(cube.ChanceSeparation, sizeAncestorFaces);
 
-            _rigidbodys.Add(newCube.GetComponent<Rigidbody>());
+            _rigidbodys.Add(newCube.Rigidbody);
         }
 
         return _rigidbodys;

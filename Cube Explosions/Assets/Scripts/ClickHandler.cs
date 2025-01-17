@@ -26,9 +26,8 @@ public class ClickHandler : MonoBehaviour
         if (Input.GetMouseButtonDown(LeftMouseButton))
         {
             Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, _rayLength, _layerMask))
+            if (Physics.Raycast(ray, out RaycastHit hit, _rayLength, _layerMask))
             {
                 if (hit.collider.TryGetComponent(out Cube cube))
                 {
