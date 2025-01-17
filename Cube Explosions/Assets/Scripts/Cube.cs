@@ -15,7 +15,7 @@ public class Cube : MonoBehaviour
         ChanceSeparation = chanceAncestorSeparation / ReductionRatio;
     }
 
-    public bool CheckPossibilitySeparation()
+    public bool GetSplitPossibility()
     {
         float minimumNumber = 0;
         float maximumNumber = 100;

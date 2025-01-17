@@ -31,9 +31,13 @@ public class ClickHandler : MonoBehaviour
             {
                 if (hit.collider.TryGetComponent(out Cube cube))
                 {
-                    if (cube.CheckPossibilitySeparation())
+                    if (cube.GetSplitPossibility())
                     {
                         _explosion.Explode(_spawner.CreateCubes(cube));
+                    }
+                    else
+                    {
+                        _explosion.Explode(cube);
                     }
                 }
 
